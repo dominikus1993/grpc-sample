@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option csharp_namespace = "Fib.Api";
+
+package fib;
+
+service FibCalculator {
+  rpc Calculate (CalculateRequest) returns (FibReply);
+}
+
+message CalculateRequest {
+  int32 name = 1;
+}
+
+message FibReply {
+  int64 result = 1;
+}
