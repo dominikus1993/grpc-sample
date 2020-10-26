@@ -32,6 +32,7 @@ namespace Fib.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<GreeterService>();
+                endpoints.MapGrpcService<FibCalculator.FibCalculatorBase>();
 
                 endpoints.MapGet("/", async context =>
                 {

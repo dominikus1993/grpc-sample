@@ -5,6 +5,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
+    <Protobuf Include="../protos/fib.proto" GrpcServices="Server" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Application\Services" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>
