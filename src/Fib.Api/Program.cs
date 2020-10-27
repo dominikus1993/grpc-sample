@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
 
 namespace Fib.Api
@@ -12,6 +13,7 @@ namespace Fib.Api
     {
         public static void Main(string[] args)
         {
+            AppContext.SetSwitch( "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -21,6 +23,11 @@ namespace Fib.Api
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.ConfigureKestrel(options =>
+                    {
+                        options.ListenAnyIP(5000, o => o.Protocols = 
+                            HttpProtocols.Http2);
+                    });
                     webBuilder.UseStartup<Startup>();
                 });
     }

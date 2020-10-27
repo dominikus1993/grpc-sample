@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Fib.Api.Application.Services;
+using Fib.Api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -17,6 +19,7 @@ namespace Fib.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGrpc();
+            services.AddTransient<FibonacciCalculator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -28,11 +31,11 @@ namespace Fib.Api
             }
 
             app.UseRouting();
-
+        
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<GreeterService>();
-                endpoints.MapGrpcService<FibCalculator.FibCalculatorBase>();
+                endpoints.MapGrpcService<FibCalculatorService>();
 
                 endpoints.MapGet("/", async context =>
                 {
