@@ -14,12 +14,6 @@ ENV DD_DOTNET_TRACER_HOME=/opt/datadog
 ENV DD_LOGS_INJECTION=true
 ENV DD_ADONET_ENABLED=false
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1.401 AS build
-WORKDIR /src
-COPY . .
-RUN dotnet tool restore
-ENV PATH="/root/.dotnet/tools:${PATH}"
-
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1.403 AS build
 WORKDIR /src
 COPY . .
